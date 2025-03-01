@@ -1,0 +1,51 @@
+{% extends 'recipesapp/base.html' %}
+
+
+{% block title %}
+    Главная
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        {% if user.is_authenticated %}
+            <h3><a href="{% url 'recipesapp:recipe_create' %}">Создать рецепт</a></h3>
+        {% else %}
+            <h4>Чтобы добавить рецепт авторизуйтесь, либо зарегистрируйтесь в системе</h4>
+        {% endif %}
+
+        <h2>Рецепты</h2>
+        {% if recipes %}
+            <div class="recipe">
+
+                {% for recipe in recipes %}
+                    <div class="box">
+                        {% if recipe.cover %}
+                            <img class="img_title" src="{{ recipe.cover.url }}" alt="{{ recipe.title }}">
+                        {% endif %}
+
+                        <h4><a href="{% url 'recipesapp:recipe_details' pk=recipe.pk %}">{{ recipe.title }}</a></h4>
+                        <ul>
+                            {% if recipe.description|length > 150 %}
+                                <li>Описание: {{ recipe.description|truncatechars:150 }}</li>
+                            {% else %}
+                                <li>Описание: {{ recipe.description }}</li>
+                            {% endif %}
+                            <li>Время приготовления: {{ recipe.cooking_time }}</li>
+                        </ul>
+                    </div>
+{#                    <br>#}
+                    </div>
+
+                {% endfor %}
+        {% else %}
+
+                <p>
+                Рецептов пока нет
+                </p>
+        {% endif %}
+
+    </div>
+
+
+
+{% endblock %}

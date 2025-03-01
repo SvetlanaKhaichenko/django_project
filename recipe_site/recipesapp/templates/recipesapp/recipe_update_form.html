@@ -1,0 +1,28 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+    Редактировать рецепт
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        <h1>Редактировать рецепт: </h1>
+        <div>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+{#                <p>#}
+{#                    <label for="title">Наименование: </label>#}
+{#                    <input type="text" name="title">#}
+{#                </p>#}
+                <button type="submit">
+                    Отредактировать
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

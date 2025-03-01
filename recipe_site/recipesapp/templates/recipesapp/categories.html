@@ -1,0 +1,16 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+	Категории рецептов
+{% endblock %}
+
+{% block body %}
+<ul>
+{% for category in categories %}
+		<li><a href="{% url 'recipesapp:category_details' pk=category.id %}">{{ category }}</a></li>
+
+	{% endfor %}
+
+</ul>
+
+{% endblock %}

@@ -1,0 +1,34 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+    Категория: {{ categories.recipecategory_id.name }}
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        <h3>Категория: {{ categories.name }}</h3>
+
+
+        <ul>
+            {% for recipe in categories.recipes.all %}
+                <div>
+                <li><a href="{% url 'recipesapp:recipe_details' pk=recipe.pk %}">{{ recipe }}</a></li>
+                    <br>
+                {% if recipe.cover %}
+                <img class="img_title" src="{{ recipe.cover.url }}" alt="{{ recipe.title }}">
+                {% endif %}
+                {% if recipe.description|length > 150 %}
+                                <p>Описание: {{ recipe.description|truncatechars:150 }}</p>
+                            {% else %}
+                                <p>Описание: {{ recipe.description }}</p>
+                {% endif %}
+                </div>
+
+
+            {% endfor %}
+
+        </ul>
+    </div>
+
+
+{% endblock %}

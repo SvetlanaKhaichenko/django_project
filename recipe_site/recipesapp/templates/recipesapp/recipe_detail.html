@@ -1,0 +1,38 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+    Рецепт: {{ recipe.title }}
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+        <h1>Рецепт: <strong>{{ recipe.title }}</strong></h1>
+        <h5>Категория: {% firstof recipe.recipe_category.all.first '-' %}</h5>
+
+        <div>
+            {% if recipe.cover %}
+                <img class="cover" src="{{ recipe.cover.url }}" alt="{{ recipe.title}}">
+            {% endif %}
+
+            <div><b>Описание</b>: {{ recipe.description }}</div>
+            <br>
+            <div><b>Время приготовления</b>: {{ recipe.description }}</div>
+            <br>
+            <div><b>Ингридиенты</b>: {{ recipe.ingredients }}</div>
+            <br>
+            <div><b>Инструкция</b>: {{ recipe.instructions }}</div>
+            <br>
+            <div><b>Дата публикации</b>: {{ recipe.date_published }}</div>
+            {#    <div>Автор публикации: {{ recipe.author }}</div>#}
+        </div>
+        {% if user.is_authenticated %}
+            <div>
+                <a href="{% url 'recipesapp:recipe_update' pk=recipe.pk %}">Редактировать рецепт</a>
+            </div>
+            <div>
+                <a href="{% url 'recipesapp:recipe_delete' pk=recipe.pk %}">Удалить рецепт</a>
+            </div>
+        {% endif %}
+    </div>
+
+{% endblock %}

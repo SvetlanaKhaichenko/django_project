@@ -1,0 +1,22 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+	Удалить рецепт
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+    <h3>Вы уверены, что хотите удалить рецепт: {{ object.title }}?</h3>
+
+    <div>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">
+            Удалить
+        </button>
+    </form>
+    </div>
+    </div>
+
+{% endblock %}

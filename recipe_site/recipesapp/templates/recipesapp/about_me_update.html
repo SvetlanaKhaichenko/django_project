@@ -1,0 +1,27 @@
+{% extends 'recipesapp/base.html' %}
+
+{% block title %}
+	Мой профиль
+{% endblock %}
+
+{% block body %}
+    <div class="box">
+    <h3>Мой профиль</h3>
+
+        <div>
+            <form method="post">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+            <button type="submit">
+                Редактировать
+            </button>
+        </div>
+
+
+
+
+    </div>
+
+
+{% endblock %}
